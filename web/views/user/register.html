@@ -1,0 +1,73 @@
+
+<div class="row">
+    <div class="col s12 m12 center">
+        <h2>Register to Body Mass Calculator</h2>
+    </div>
+    <div class="card col s12 m12">
+        <form action="/user/register" method="POST">
+            <div class="container">
+                <div class="row">
+                    <div class="input-field col s12 m6">
+                        <label><b>Firstname</b></label>
+                        <input type="text" placeholder="Enter Firstname" name="firstname" required>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <label><b>Username</b></label>
+                        <input type="text" placeholder="Enter Username" name="username" required>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <label><b>Password</b></label>
+                        <input type="password" placeholder="Enter Password" name="password" required>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="input-field col s12 m6">
+                        <label><b>Gender</b></label>
+                        <select id="gender" class="form-resource" name="gender">
+                            <option value="1">Male</option>
+                            <option value="2">Female</option>
+                        </select>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <label><b>Units</b></label>
+                        <select id="unitType" class="form-resource" name="type">
+                            <option value="1">m-kg</option>
+                            <option value="2">ft-lb</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m6">
+                        <label><b>Height (<span class="height_type">m</span>)</b></label>
+                        <input class="number" type="text" placeholder="" name="height" required>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <label><b>Mass (<span class="mass_type">kg</span>)</b></label>
+                        <input class="number" type="text" placeholder="" name="mass" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <button class="btn" type="submit">Calculate</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        // Initiatlize selects
+        $('select').formSelect();
+        $("#unitType").on("change",function(){
+            $(".height_type").text( $(this).find("option:selected").text().split("-")[0] );
+            $(".mass_type").text( $(this).find("option:selected").text().split("-")[1] );
+        });
+        $("input.number").on("change",function(){
+            if( isNaN( $(this).val() ) || $(this).val()<0 ){
+                $(this).val("");
+            }
+        });
+    });
+</script>
